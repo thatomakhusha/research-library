@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+/* Design tokens from the Figma design.
+   Use them as Tailwind classes, e.g. bg-page, text-ink, border-line */
+@theme {
+  --color-page: #f4f5f7;
+  --color-surface: #ffffff;
+  --color-ink: #14213d;
+  --color-muted: #4a5568;
+  --color-line: #d9dee6;
+  --color-line-strong: #b9c1cf;
+
+  --color-navy: #14213d;
+  --color-navy-active: #243456;
+  --color-navy-muted: #b8c2d6;
+
+  --color-primary: #1f6f5c;
+  --color-primary-hover: #185a4a;
+  --color-link: #1d3f8a;
+  --color-danger: #b42318;
+  --color-danger-hover: #912018;
+
+  /* Tag chips: background + text */
+  --color-tag-ai: #e3ecfb;
+  --color-tag-ai-ink: #1d3f8a;
+  --color-tag-law: #fbefd5;
+  --color-tag-law-ink: #6b4200;
+  --color-tag-sec: #ddf1ec;
+  --color-tag-sec-ink: #14594a;
+}
+
+/* Fonts come from next/font in layout.tsx */
+@theme inline {
+  --font-sans: var(--font-plex-sans), system-ui, sans-serif;
+  --font-serif: var(--font-source-serif), Georgia, serif;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+
+  body {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  a {
+    color: var(--color-link);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-link);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-line bg-surface p-6;
+  }
+
+  .field-label {
+    @apply mb-1.5 block text-sm font-medium;
+  }
+
+  .field {
+    @apply min-h-11 w-full rounded-lg border border-line-strong bg-surface px-3 text-ink;
+  }
+
+  textarea.field {
+    @apply py-3;
+  }
+
+  .field[aria-invalid="true"] {
+    border-color: var(--color-danger);
+  }
+
+  .field-hint {
+    @apply mt-1.5 text-[13px] text-muted;
+  }
+
+  .field-error {
+    @apply mt-1.5 text-[13px] font-medium text-danger;
+  }
+
+  .btn-primary {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-primary px-5 font-semibold text-white no-underline;
+  }
+  .btn-primary:hover {
+    background-color: var(--color-primary-hover);
+  }
+
+  .btn-secondary {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-line-strong bg-surface px-5 font-medium text-ink no-underline;
+  }
+  .btn-secondary:hover {
+    background-color: var(--color-page);
+  }
+
+  .btn-danger {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-danger px-5 font-semibold text-white no-underline;
+  }
+  .btn-danger:hover {
+    background-color: var(--color-danger-hover);
+  }
+
+  .btn-primary:disabled,
+  .btn-secondary:disabled,
+  .btn-danger:disabled {
+    @apply cursor-not-allowed opacity-60;
+  }
+}
